@@ -1,0 +1,82 @@
+﻿@model Partners.ViewModels.PartnerVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Partners</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped tableList">
+    <tr>
+        <th scope="col">
+            FullName
+        </th>
+        <th scope="col">
+            PartnerNumber
+        </th>
+        <th scope="col">
+            CroatianPIN
+        </th>
+        <th scope="col">
+            PartnerTypeId
+        </th>
+        <th scope="col">
+            CreatedAtUtc
+        </th>
+        <th scope="col">
+            IsForeign
+        </th>
+        <th scope="col">
+            ExternalCode
+        </th>
+        <th scope="col">
+            Gender
+        </th>
+
+        @*<th></th>*@
+    </tr>
+
+
+    @foreach (var item in Model.PartnerList)
+    {
+        var FullName = item.FirstName + " " + item.LastName;
+        var ID = item.ID;
+        var getId = Model.Id;
+
+        <tr data-toggle="modal" data-id="@ID" data-target="#partner_@ID" @(item.ID == getId ? "class=table-primary" : "")>
+            <td class="clickableRow">
+                @FullName
+            </td>
+            <td class="clickableRow">
+                @Html.DisplayFor(modelItem => item.PartnerNumber)
+            </td>
+            <td class="clickableRow">
+                @Html.DisplayFor(modelItem => item.CroatianPIN)
+            </td>
+            <td class="clickableRow">
+                <text>@(item.PartnerTypeId == 1 ? "Personal" : "Legal")</text>
+            </td>
+            <td class="clickableRow">
+
+                @Html.DisplayFor(modelItem => item.CreatedAtUtc)
+            </td>
+            <td class="clickableRow">
+                <text>@(item.IsForeign == true ? "Yes" : "No")</text>
+            </td>
+            <td class="clickableRow">
+                @Html.DisplayFor(modelItem => item.ExternalCode)
+            </td>
+            <td class="clickableRow">
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+
